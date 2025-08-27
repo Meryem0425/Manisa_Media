@@ -1,0 +1,133 @@
+{% load static %}
+{% load custom_filters %}    
+    <!-- Topbar Start -->
+    <div class="container-fluid d-none d-lg-block">
+        <div class="row align-items-center bg-dark px-lg-5">
+   <div class="col-lg-9">
+    <nav class="navbar navbar-expand-sm bg-dark p-0">
+        <ul class="navbar-nav ml-n2">
+            <li class="nav-item border-right">
+                <a id="current-date" class="nav-link text-body small" href="#"></a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <li class="nav-item border-right">
+                    <span class="nav-link text-body small">
+                        Hoşgeldin {{ user.username }}
+                    </span>
+                </li>
+                    <!-- Favorilerim linki burada -->
+                <li class="nav-item border-right">
+                    <a class="nav-link text-body small" href="{% url 'favorites_list' %}">Favorilerim</a>
+                </li>
+               <li class="nav-item border-right">
+    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="nav-link text-body small" style="background:none; border:none;">
+            <i class="bi bi-box-arrow-right"></i>
+        </button>
+    </form>
+</li>
+
+            {% else %}
+                <li class="nav-item border-right">
+                    <a class="nav-link text-body small" href="{% url 'register' %}">Kayıt Ol / Giriş Yap</a>
+                </li>
+              
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+
+
+            <div class="col-lg-3 text-right d-none d-md-block">
+                <nav class="navbar navbar-expand-sm bg-dark p-0">
+                    <ul class="navbar-nav ml-auto mr-n2">
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#"><small class="fab fa-twitter"></small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#"><small class="fab fa-facebook-f"></small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#"><small class="fab fa-linkedin-in"></small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#"><small class="fab fa-instagram"></small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#"><small class="fab fa-google-plus-g"></small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-body" href="#"><small class="fab fa-youtube"></small></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row align-items-center bg-white py-3 px-lg-5">
+           <div class="col-lg-4 d-flex align-items-center">
+                <a href="{% url 'index' %}" class="navbar-brand d-flex align-items-center">
+    <img src="{% static 'img/logo(1).png' %}" alt="Logo" style="height: 90px;">
+    <h1 class="m-0 display-4 text-uppercase text-primary">
+        Manisa<span class="text-secondary font-weight-normal">Media</span>
+    </h1>
+</a>
+
+            </div>
+
+        </div>
+            <div class="col-lg-8 text-center text-lg-right">
+                <a href="https://htmlcodex.com"><img class="img-fluid" src="img/ads-728x90.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+            <a href="{% url 'index' %}" class="navbar-brand d-block d-lg-none">
+
+                <h1 class="m-0 display-4 text-uppercase text-primary">Manisa<span class="text-white font-weight-normal">Media</span></h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="{% url 'index' %}" class="nav-item nav-link 
+                    
+                    {% if request.path == '/' %}
+                        active
+                    {% endif %}
+
+                    ">Anasayfa</a>
+                    
+                    {% for category in categorys %}     
+                    <a href="{% url 'category' category|create_slug:'category' %}" class="nav-item nav-link
+                    
+                    {% if request.path|get_path_part:2 == category|create_slug:'category' %}
+                        active
+                    {% endif %}
+
+                    ">{{ category.category }}</a>
+
+                    {% endfor %}
+
+                </div>
+               <form method="get" action="{% url 'search' %}" class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
+    <input type="text" name="q" class="form-control border-0" placeholder="Anahtar Kelime Ara">
+    <div class="input-group-append">
+        <button type="submit" class="input-group-text bg-primary text-dark border-0 px-3">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+</form>
+
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->

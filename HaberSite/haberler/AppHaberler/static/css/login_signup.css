@@ -1,0 +1,116 @@
+/* Sayfanın tamamı */
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* yatay ortalama */
+  align-items: center;     /* dikey ortalama */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url("/static/img/45.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+}
+
+
+/* Container */
+.container {
+  width: 100%;
+  padding: 15px; /* küçük ekranlarda kenarlara yapışmasın */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form Wrapper */
+.form-wrapper {
+  width: 100%;
+  max-width: 360px; /* masaüstünde en fazla 360px */
+  background: #f7f7f7;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Toggle Buttons */
+.toggle-buttons {
+  display: flex;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.toggle-buttons button.active {
+  background: #387045;
+  color: white;
+}
+
+#slider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 3px;
+  background: #387045;
+  transition: 0.3s;
+}
+
+/* Forms */
+.form {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form.active {
+  display: flex;
+}
+
+.form input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.form button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background: #387045;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.form button:hover {
+  background: #2f5a39;
+}
+
+/* Responsive ayar */
+@media (max-width: 480px) {
+  .form-wrapper {
+    padding: 20px;
+  }
+
+  .form input,
+  .form button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
